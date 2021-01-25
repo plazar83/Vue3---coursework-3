@@ -18,8 +18,11 @@ export default createStore({
     }
   },
   mutations: {
+    setTotals(state, payload) {
+      state.total = payload
+    },
     addPost(state, payload) {
-      state.posts.push(payload)
+      state.posts = payload
     }
   },
   actions: {
@@ -42,7 +45,11 @@ export default createStore({
       try {
         const response = await fetch('https://vue-coursework3-default-rtdb.firebaseio.com/posts.json')
         const responseData = await response.json()
-        return Object.keys(responseData).map(key => ({ ...responseData[key], id: key }))
+        const posts = Object.keys(responseData).map(key => ({ ...responseData[key], id: key }))
+        const activePosts = posts.filter(p => p.status === 'active')
+        this.commit('setTotals', activePosts.length)
+        this.commit('addPost', { ...posts })
+        return posts
       } catch (e) {
         console.log(e)
       }

@@ -1,6 +1,6 @@
 <template>
   <form class="card" @submit.prevent="newPost">
-    <h1>Создать новую задачу {{ new Date().toLocaleDateString() }}</h1>
+    <h1>Создать новую задачу</h1>
     <div class="form-control">
       <label for="title">Название</label>
       <input v-model="title" type="text" id="title">

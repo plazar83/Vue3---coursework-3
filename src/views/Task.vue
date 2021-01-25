@@ -34,7 +34,10 @@ export default {
       post.value = await store.dispatch('fetchPostById', postId.value)
       loading.value = ref(false)
     }
-    onMounted(() => fetchPostById())
+    onMounted(() => {
+      fetchPostById()
+    })
+
     async function changeStatus(postId, status) {
       await store.dispatch('changeStatus', { postId, status })
       post.value.status = status
