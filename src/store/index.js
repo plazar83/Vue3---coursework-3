@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state() {
     return {
-      total: 10,
+      total: 0,
       posts: []
     }
   },
@@ -11,9 +11,6 @@ export default createStore({
       return state.total
     },
     getPosts(state) {
-      return state.posts
-    },
-    getPostsById(state) {
       return state.posts
     }
   },

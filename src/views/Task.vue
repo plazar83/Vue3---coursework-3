@@ -30,14 +30,15 @@ export default {
     const route = useRoute()
     const postId = ref(route.params.id)
     const post = ref({})
+
     async function fetchPostById() {
+      loading.value = false
       post.value = await store.dispatch('fetchPostById', postId.value)
-      loading.value = ref(false)
+      loading.value = true
     }
     onMounted(() => {
       fetchPostById()
     })
-
     async function changeStatus(postId, status) {
       await store.dispatch('changeStatus', { postId, status })
       post.value.status = status

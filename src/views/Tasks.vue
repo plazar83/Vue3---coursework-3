@@ -1,5 +1,5 @@
 <template>
-  <h1 v-if="!getTotal()" class="text-white center">Задач пока нет</h1>
+  <h1 v-if="!getPosts()" class="text-white center">Задач пока нет</h1>
   <template v-else>
     <AppLoader v-if="!loading" />
     <div v-else>
