@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Tasks from '../views/Tasks.vue'
 
 const routes = [
@@ -13,14 +13,14 @@ const routes = [
     component: () => import('../views/New.vue')
   },
   {
-    path: '/task',
+    path: '/post/:id?',
     name: 'Task',
     component: () => import('../views/Task.vue')
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   linkActiveClass: 'active',
   linkExactActiveClass: 'active'

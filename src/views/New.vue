@@ -1,23 +1,54 @@
 <template>
-  <form class="card">
-    <h1>Создать новую задачу</h1>
+  <form class="card" @submit.prevent="newPost">
+    <h1>Создать новую задачу {{ new Date().toLocaleDateString() }}</h1>
     <div class="form-control">
       <label for="title">Название</label>
-      <input type="text" id="title">
+      <input v-model="title" type="text" id="title">
     </div>
 
     <div class="form-control">
       <label for="date">Дата дэдлайна</label>
-      <input type="date" id="date">
+      <input v-model="endDate" type="date" id="date">
+      {{status}}
     </div>
 
     <div class="form-control">
       <label for="description">Описание</label>
-      <textarea id="description"></textarea>
+      <textarea v-model="description" id="description"></textarea>
     </div>
 
     <button class="btn primary">Создать</button>
   </form>
 </template>
 <script>
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+export default {
+  setup() {
+    const store = useStore()
+    const title = ref('')
+    const endDate = ref('')
+    const description = ref('')
+    const status = computed(() => new Date(endDate.value) > new Date() ? 'active' : 'cancelled')
+
+    async function newPost() {
+      try {
+        await store.dispatch('newPost', {
+          title: title.value,
+          endDate: endDate.value,
+          description: description.value,
+          status: status.value
+        })
+      } catch (e) {}
+    }
+
+    return {
+      newPost,
+      title,
+      endDate,
+      description,
+      status
+    }
+  }
+}
 </script>
