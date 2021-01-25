@@ -12,7 +12,7 @@
     </div>
   </div>
   <h3 v-else class="text-white center">
-    Задачи с id = <strong>Tут АЙДИ</strong> нет.
+    Задачи с id = <strong>{{postId}}</strong> нет.
   </h3>
 </template>
 
